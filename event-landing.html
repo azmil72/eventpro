@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event Landing</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap');
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: #9dd3e9;
+    overflow-x: hidden;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+  }
+
+  /* Background layers using absolute positioned divs with border-radius shapes */
+  .background-shape {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150vw;
+    max-width: 1000px;
+    border-radius: 50% / 100%;
+    background-color: #dbf0f9;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+  }
+
+  .shape1 {
+    top: 15vh;
+    height: 160px;
+  }
+
+  .shape2 {
+    top: 50vh;
+    height: 260px;
+    background-color: #def7fb;
+  }
+
+  .shape3 {
+    top: 80vh;
+    height: 160px;
+    background-color: #dbf0f9;
+  }
+
+  /* Content container */
+  .content {
+    position: relative;
+    z-index: 10;
+    max-width: 290px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  /* Logo with icon and text */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: #111827;
+    user-select: none;
+  }
+
+  .material-icons {
+    font-size: 36px;
+    color: #fbbf24; /* bright gold/yellow color */
+  }
+
+  /* Buttons style */
+  button {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #375a9d; /* blue shade */
+    border: none;
+    border-radius: 24px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(55,90,157,0.4);
+    user-select: none;
+  }
+
+  button:hover, button:focus {
+    background-color: #2a456f;
+    box-shadow: 0 6px 14px rgba(55,90,157,0.6);
+    outline: none;
+  }
+
+  button:active {
+    box-shadow: 0 2px 6px rgba(55,90,157,0.25);
+    background-color: #244063;
+  }
+
+  /* Responsive adjustments */
+  @media(min-width: 768px) {
+    body {
+      background: #9dd3e9;
+      padding: 40px;
+      align-items: center;
+    }
+    .content {
+      max-width: 400px;
+      gap: 36px;
+    }
+    button {
+      padding: 16px 0;
+      font-size: 1.15rem;
+    }
+    .material-icons {
+      font-size: 48px;
+    }
+  }
+
+  @media(min-width: 1440px) {
+    .content {
+      max-width: 480px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="background-shape shape1"></div>
+  <div class="background-shape shape2"></div>
+  <div class="background-shape shape3"></div>
+
+  <main class="content" role="main" aria-label="Event sign up and login">
+    <div class="logo" aria-label="Event logo with camera icon">
+      <span class="material-icons" aria-hidden="true">camera_alt</span>
+      <span>EVENT</span>
+    </div>
+    <button type="button" id="signUpBtn" aria-label="Sign up">Sign up</button>
+    <button type="button" id="loginBtn" aria-label="Login">Login</button>
+  </main>
+
+<script>
+  // Example JS for future extensions if needed
+  document.getElementById('signUpBtn').addEventListener('click', () => {
+    alert('Sign up clicked!');
+  });
+
+  document.getElementById('loginBtn').addEventListener('click', () => {
+    alert('Login clicked!');
+  });
+</script>
+</body>
+</html>
+
+```

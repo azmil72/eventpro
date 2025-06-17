@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guest List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+    }
+
+    header {
+      background-color: #4d7efc;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    header .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    header .icons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .guest-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .guest-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .guest-card img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 0.5rem;
+    }
+
+    .guest-card .name {
+      font-weight: 600;
+    }
+
+    .guest-card .status {
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #3c78d8;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 2rem;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 350px;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1rem;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .modal-content button {
+      padding: 0.6rem 1.2rem;
+      background-color: #4d7efc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .footer {
+            background-color: #d3d2d2;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+
+    header .icons input {
+  display: none;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+  </style>
+</head>
+<body>
+
+    <header>
+        <div class="icons"><span>&larr;</span></div>
+        <div class="title">Guest</div>
+        <div class="icons">
+          <span class="search-toggle" onclick="toggleSearch()">🔍</span>
+          <input type="text" id="searchInput" placeholder="Cari tugas..." />
+        </div>
+      </header>
+
+  <!-- Guest List -->
+  <main class="guest-container" id="guest-list">
+    <div class="guest-card">
+      <img src="assets/emoji _boy_.svg" alt="avatar">
+      <div class="name">andik</div>
+      <div class="status" style="color:green;">Invitation sent</div>
+    </div>
+    <div class="guest-card">
+      <img src="assets/emoji _boy_.svg" alt="avatar">
+      <div class="name">toyek</div>
+      <div class="status" style="color:red;">Not sent</div>
+    </div>
+    <div class="guest-card">
+      <img src="assets/emoji _boy_.svg" alt="avatar">
+      <div class="name">Mila</div>
+      <div class="status" style="color:green;">Invitation sent</div>
+    </div>
+    <div class="guest-card">
+      <img src="assets/emoji _boy_.svg" alt="avatar">
+      <div class="name">Ming</div>
+      <div class="status" style="color:green;">Invitation sent</div>
+    </div>
+  </main>
+
+  <!-- FAB -->
+  <div class="fab" onclick="openModal()">+</div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Tambah Tamu</h2>
+      <input type="text" id="guestName" placeholder="Nama tamu">
+      <select id="guestStatus">
+        <option value="sent">Invitation sent</option>
+        <option value="not">Not sent</option>
+      </select>
+      <button onclick="addGuest()">Simpan</button>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav>
+    <div class="footer">
+      <a href="home.html"><img src="assets/Group.svg"></a>
+      <a href="historylist.html"><img src="assets/material-symbols_history.svg"></a>
+      <a href="notifikasi.html"><img src="assets/Group(1).svg"></a>
+      <a href="profil.html"><img src="assets/Group(2).svg"></a>
+    </div>
+  </nav>
+
+  <!-- JS -->
+  <script>
+    const modal = document.getElementById("modal");
+
+    function openModal() {
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function toggleSearch() {
+  const input = document.getElementById("searchInput");
+  if (input.style.display === "inline-block") {
+    input.style.display = "none";
+    input.value = "";
+    filterTasks(""); // Reset filter
+  } else {
+    input.style.display = "inline-block";
+    input.focus();
+  }
+}
+
+document.getElementById("searchInput").addEventListener("input", function () {
+  filterTasks(this.value);
+});
+
+function filterTasks(keyword) {
+  const tasks = document.querySelectorAll(".task-card");
+  tasks.forEach(task => {
+    const text = task.querySelector(".title").textContent.toLowerCase();
+    task.style.display = text.includes(keyword.toLowerCase()) ? "flex" : "none";
+  });
+}
+
+
+    function addGuest() {
+      const name = document.getElementById("guestName").value.trim();
+      const status = document.getElementById("guestStatus").value;
+      const guestList = document.getElementById("guest-list");
+
+      if (name === "") {
+        alert("Nama tidak boleh kosong!");
+        return;
+      }
+
+      const card = document.createElement("div");
+      card.className = "guest-card";
+      card.innerHTML = `
+        <img src="https://www.svgrepo.com/show/382106/user-avatar.svg" alt="avatar">
+        <div class="name">${name}</div>
+        <div class="status" style="color:${status === 'sent' ? 'green' : 'red'};">
+          ${status === 'sent' ? 'Invitation sent' : 'Not sent'}
+        </div>
+      `;
+
+      guestList.appendChild(card);
+      closeModal();
+      document.getElementById("guestName").value = "";
+      document.getElementById("guestStatus").value = "sent";
+    }
+
+    // Klik di luar modal untuk menutup
+    window.onclick = function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    };
+  </script>
+
+</body>
+</html>

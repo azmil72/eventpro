@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f6f8; }
+
+    header {
+      background-color: #4d7efc;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .search-toggle {
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .search-container {
+      background-color: #4d7efc;
+      padding: 0 1rem 0.5rem;
+    }
+
+    .search-input {
+      width: 100%;
+      display: none;
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+
+    .budget-list {
+      padding: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .budget-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .budget-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .budget-info .name {
+      font-weight: bold;
+    }
+
+    .budget-info .phone {
+      color: green;
+      font-size: 0.9rem;
+    }
+
+    .budget-price {
+      font-size: 0.95rem;
+      margin-right: 10px;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: #3c78d8;
+      color: white;
+      border-radius: 50%;
+      font-size: 2rem;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 50px;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 350px;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1rem;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .modal-content button {
+      padding: 0.6rem 1.2rem;
+      background-color: #4d7efc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .footer {
+            background-color: #d3d2d2;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <span>&larr;</span>
+      <span class="title">Budget</span>
+    </div>
+    <div>
+      <span class="search-toggle" onclick="toggleSearch()">🔍</span>
+    </div>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Cari budget..." onkeyup="filterBudget()">
+  </div>
+
+  <!-- Budget List -->
+  <main class="budget-list" id="budgetList">
+    <div class="budget-card">
+      <div class="budget-info">
+        <div class="name">Undangan</div>
+        <div class="phone">+62 852-3456-7830</div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div class="budget-price">Rp. 30.000,00</div>
+        <input type="checkbox">
+      </div>
+    </div>
+    <div class="budget-card">
+      <div class="budget-info">
+        <div class="name">Sound system</div>
+        <div class="phone">+62 852-3456-7830</div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <div class="budget-price">Rp. 300.000,00</div>
+        <input type="checkbox">
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating Action Button -->
+  <div class="fab" onclick="openModal()">+</div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Tambah Budget</h2>
+      <input type="text" id="budgetName" placeholder="Nama item">
+      <input type="text" id="budgetPhone" placeholder="Nomor telepon">
+      <input type="number" id="budgetAmount" placeholder="Harga (contoh: 300000)">
+      <button onclick="addBudget()">Simpan</button>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav>
+    <div class="footer">
+      <a href="home.html"><img src="assets/Group.svg"></a>
+      <a href="historylist.html"><img src="assets/material-symbols_history.svg"></a>
+      <a href="notifikasi.html"><img src="assets/Group(1).svg"></a>
+      <a href="profil.html"><img src="assets/Group(2).svg"></a>
+    </div>
+  </nav>
+
+  <!-- JavaScript -->
+  <script>
+    const modal = document.getElementById("modal");
+    const searchInput = document.getElementById("searchInput");
+
+    function openModal() {
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(e) {
+      if (e.target === modal) closeModal();
+    }
+
+    function toggleSearch() {
+      const input = document.getElementById("searchInput");
+      input.style.display = input.style.display === "block" ? "none" : "block";
+      if (input.style.display === "block") input.focus();
+    }
+
+    function addBudget() {
+      const name = document.getElementById("budgetName").value.trim();
+      const phone = document.getElementById("budgetPhone").value.trim();
+      const amount = document.getElementById("budgetAmount").value.trim();
+
+      if (!name || !phone || !amount) {
+        alert("Semua kolom harus diisi!");
+        return;
+      }
+
+      const formattedAmount = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR'
+      }).format(amount);
+
+      const card = document.createElement("div");
+      card.className = "budget-card";
+      card.innerHTML = `
+        <div class="budget-info">
+          <div class="name">${name}</div>
+          <div class="phone">${phone}</div>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <div class="budget-price">${formattedAmount}</div>
+          <input type="checkbox">
+        </div>
+      `;
+      document.getElementById("budgetList").appendChild(card);
+      closeModal();
+      document.getElementById("budgetName").value = "";
+      document.getElementById("budgetPhone").value = "";
+      document.getElementById("budgetAmount").value = "";
+    }
+
+    function filterBudget() {
+      const filter = searchInput.value.toLowerCase();
+      const cards = document.querySelectorAll('.budget-card');
+      cards.forEach(card => {
+        const name = card.querySelector('.name').textContent.toLowerCase();
+        const phone = card.querySelector('.phone').textContent.toLowerCase();
+        if (name.includes(filter) || phone.includes(filter)) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

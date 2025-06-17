@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+    }
+
+    header {
+      background-color: #4d7efc;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    header .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    header .icons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .task-container {
+      padding: 1rem;
+    }
+
+    .task-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .task-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .task-text .title {
+      font-weight: 500;
+    }
+
+    .task-text .date {
+      color: green;
+      font-size: 0.8rem;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #3c78d8;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 2rem;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    nav i {
+      font-size: 1.2rem;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+
+    .footer {
+            background-color: #d3d2d2;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+    .footer a img {
+      height: 24px;
+    }
+
+    /* Pop-up style */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .popup {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .popup h3 {
+      margin-top: 0;
+    }
+
+    .popup input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .popup button {
+      padding: 10px 20px;
+      border: none;
+      background: #4d7efc;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .popup .close-btn {
+      background: #ccc;
+      margin-left: 10px;
+    }
+    header .icons input {
+  display: none;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+
+  </style>
+</head>
+<body>
+
+    <header>
+        <div class="icons"><span>&larr;</span></div>
+        <div class="title">Task</div>
+        <div class="icons">
+          <span class="search-toggle" onclick="toggleSearch()">🔍</span>
+          <input type="text" id="searchInput" placeholder="Cari tugas..." />
+        </div>
+      </header>
+      
+
+  <main class="task-container" id="taskList">
+    <div class="task-card">
+      <div class="task-text">
+        <div class="title">membuat dan sebar undangan</div>
+        <div class="date">23/02/26</div>
+      </div>
+      <input type="checkbox" />
+    </div>
+  </main>
+
+  <!-- Floating Action Button -->
+  <div class="fab" onclick="openPopup()">+</div>
+
+  <!-- Pop-up Form -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup">
+      <h3>Tambah Tugas</h3>
+      <input type="text" id="taskName" placeholder="Nama tugas" />
+      <input type="date" id="taskDate" />
+      <div style="text-align:right;">
+        <button onclick="saveTask()">Simpan</button>
+        <button class="close-btn" onclick="closePopup()">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav>
+    <div class="footer">
+      <a href="home.html"><img src="assets/Group.svg"></a>
+      <a href="historylist.html"><img src="assets/material-symbols_history.svg"></a>
+      <a href="notifikasi.html"><img src="assets/Group(1).svg"></a>
+      <a href="profil.html"><img src="assets/Group(2).svg"></a>
+    </div>
+  </nav>
+
+  <!-- Script -->
+  <script>
+
+document.getElementById("searchInput").addEventListener("input", function () {
+  filterTasks(this.value);
+});
+
+function filterTasks(keyword) {
+  const tasks = document.querySelectorAll(".task-card");
+  tasks.forEach(task => {
+    const text = task.querySelector(".title").textContent.toLowerCase();
+    task.style.display = text.includes(keyword.toLowerCase()) ? "flex" : "none";
+  });
+}
+
+
+    function openPopup() {
+      document.getElementById('popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function toggleSearch() {
+  const input = document.getElementById("searchInput");
+  if (input.style.display === "inline-block") {
+    input.style.display = "none";
+    input.value = "";
+    filterTasks(""); // Reset filter
+  } else {
+    input.style.display = "inline-block";
+    input.focus();
+  }
+}
+
+document.getElementById("searchInput").addEventListener("input", function () {
+  filterTasks(this.value);
+});
+
+function filterTasks(keyword) {
+  const tasks = document.querySelectorAll(".task-card");
+  tasks.forEach(task => {
+    const text = task.querySelector(".title").textContent.toLowerCase();
+    task.style.display = text.includes(keyword.toLowerCase()) ? "flex" : "none";
+  });
+}
+
+
+
+    function saveTask() {
+      const name = document.getElementById('taskName').value;
+      const date = document.getElementById('taskDate').value;
+
+      if (name === '' || date === '') {
+        alert("Isi semua kolom!");
+        return;
+      }
+
+      const taskList = document.getElementById('taskList');
+      const card = document.createElement('div');
+      card.className = 'task-card';
+      card.innerHTML = `
+        <div class="task-text">
+          <div class="title">${name}</div>
+          <div class="date">${date}</div>
+        </div>
+        <input type="checkbox" />
+      `;
+      taskList.appendChild(card);
+
+      // Bersihkan dan tutup popup
+      document.getElementById('taskName').value = '';
+      document.getElementById('taskDate').value = '';
+      closePopup();
+    }
+
+    // Efek centang
+    document.addEventListener('change', function (e) {
+      if (e.target.type === 'checkbox') {
+        e.target.parentElement.style.opacity = e.target.checked ? '0.5' : '1';
+      }
+    });
+  </script>
+
+</body>
+</html>

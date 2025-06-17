@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #87c3cb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background-wave {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: -1;
+    }
+
+    .signup-container {
+      width: 90%;
+      max-width: 350px;
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .signup-container h2 {
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .input-field {
+      position: relative;
+      margin: 25px 0;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 10px 5px;
+      font-size: 16px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid white;
+      color: #fff;
+      outline: none;
+    }
+
+    .input-field input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 10px 0;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .checkbox-row input {
+      margin-right: 8px;
+    }
+
+    .link-row {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .link-row a {
+      color: #4a90e2;
+      text-decoration: none;
+      margin-left: 4px;
+    }
+
+    .signup-btn {
+      background-color: #2e66a1;
+      color: white;
+      border: none;
+      padding: 14px 0;
+      width: 100%;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .signup-btn:hover {
+      background-color: #235589;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background SVG Gelombang -->
+  <svg class="background-wave" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
+    <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="fill: #b6d9e0;"></path>
+    <path d="M0,150 C150,250 350,50 500,150 L500,00 L0,0 Z" style="fill: #9bcfd8;"></path>
+    <path d="M0,200 C150,300 350,100 500,200 L500,00 L0,0 Z" style="fill: #87c3cb;"></path>
+  </svg>
+
+  <div class="signup-container">
+    <div class="input-field">
+      <input type="text" id="username" placeholder="Username">
+    </div>
+
+    <div class="input-field">
+      <input type="password" id="password" placeholder="Password">
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="remember">
+      <label for="remember">Remember me</label>
+    </div>
+
+    <div class="link-row">
+       <a href="/home.html">login</a>
+    </div>
+
+    <button class="signup-btn" onclick="signup()">Sign up</button>
+  </div>
+
+  <script>
+    function signup() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      alert(`Sign up dengan:\nUsername: ${username}\nPassword: ${password}`);
+    }
+  </script>
+</body>
+</html>

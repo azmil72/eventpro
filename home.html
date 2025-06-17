@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Manager - Home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 1s ease;
+    }
+
+    .slide {
+      width: 100%;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide h1 {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: white;
+      font-size: 1.5rem;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+
+    .menu-item {
+      background-color: #4d7efc;
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      color: white;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .menu-item:hover {
+      background-color: #345fd9;
+    }
+
+    .menu-item i {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    nav i {
+      font-size: 1.2rem;
+    }
+    .footer {
+            background-color: #d3d2d2;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5rem;
+        }
+        .menu a {
+             text-decoration: none;
+        }
+
+  </style>
+</head>
+<body>
+
+  <!-- Slider -->
+  <div class="slider">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <img src="assets/kepo.jpg" alt="slide 1" />
+        <h1>Event Manager</h1>
+      </div>
+      <div class="slide">
+        <img src="assets/ppp.jpg" alt="slide 2" />
+        <h1>Plan Your Event</h1>
+      </div>
+      <div class="slide">
+        <img src="assets/colleagues-dancing-confetti-new-years-party.jpg" alt="slide 3" />
+        <h1>Collaborate Easily</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu -->
+<!-- Menu -->
+<div class="menu">
+    <a class="menu-item" href="task.html">
+      <img src="assets/hugeicons_task-edit-01.svg" alt="Task Icon" class="menu-icon" />
+      Task
+    </a>
+    <a class="menu-item" href="guest.html">
+      <img src="assets/fluent_guest-20-regular.svg" alt="Guest Icon" class="menu-icon" />
+      Guest
+    </a>
+    <a class="menu-item" href="budgets.html">
+      <img src="assets/fluent_coin-multiple-20-regular.svg" alt="Budget Icon" class="menu-icon" />
+      Budgets
+    </a>
+    <a class="menu-item" href="vendor.html">
+      <img src="assets/healthicons_market-stall-outline.svg" alt="Vendor Icon" class="menu-icon" />
+      Vendor
+    </a>
+  </div>
+  
+  
+
+  <!-- Bottom Nav -->
+  <nav>
+    <div class="footer">
+
+        <a href="login.html"><img src="assets/Group.svg"></img></a>
+        <a href="historylist.html"><img src="assets/material-symbols_history.svg"></img></a>
+        <a href="notifikasi.html"><img src="assets/Group(1).svg"></img></a>
+        <a href="profil.html"><img src="assets/Group(2).svg"></img></a>
+    </div>
+  </nav>
+
+  <!-- JavaScript -->
+  <script>
+    let index = 0;
+    const slides = document.getElementById("slides");
+    const totalSlides = slides.children.length;
+
+    setInterval(() => {
+      index = (index + 1) % totalSlides;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }, 3000); // geser otomatis setiap 3 detik
+  </script>
+
+</body>
+</html>

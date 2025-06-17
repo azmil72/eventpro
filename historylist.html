@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>History List</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f6fa;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #4d7efc;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .container {
+      padding: 1rem;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .history-item {
+      background: white;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .date {
+      color: green;
+      font-size: 0.85rem;
+    }
+
+    .price {
+      font-weight: bold;
+      text-align: right;
+      color: #555;
+    }
+
+    .icon-line {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .icon-line img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .time {
+      font-size: 0.75rem;
+      color: #666;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 8px;
+    }
+
+    .invitation {
+      font-size: 0.8rem;
+      color: green;
+    }
+
+    .history-group {
+      position: relative;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 50px;
+      background: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 20;
+    }
+
+    nav i {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .scroll-area {
+      padding-bottom: 70px; /* untuk menghindari ketutup navbar */
+    }
+
+    .footer {
+            background-color: #d3d2d2;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>History List</header>
+
+  <!-- Main Content -->
+  <div class="container scroll-area">
+    <div class="section-title">kemarin</div>
+    <div class="history-item">
+      <div><strong>membuat dan sebar undangan</strong></div>
+      <div class="date">23/02/26</div>
+      <div class="icon-line">
+        <img src="assets/clock.svg" alt="clock">
+        <div class="time">15:01</div>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div style="display: flex; align-items: center;">
+        <img src="assets/emoji _boy_.svg" alt="avatar" class="avatar">
+        <div>
+          <div><strong>Ming</strong></div>
+          <div class="invitation">Invitation sent</div>
+        </div>
+      </div>
+      <div class="icon-line">
+        <img src="assets/clock.svg" alt="clock">
+        <div class="time">15:01</div>
+      </div>
+    </div>
+
+    <div class="section-title">7 Hari yang lalu</div>
+
+    <div class="history-item">
+      <div><strong>Undangan</strong></div>
+      <div class="date">+62 812-3456-7890</div>
+      <div class="price">Rp. 30.000,00</div>
+      <div class="icon-line">
+        <img src="assets/clock.svg" alt="clock">
+        <div class="time">15:01</div>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div><strong>Undangan</strong></div>
+      <div class="date">+62 812-3456-7890</div>
+      <div class="price">Rp. 30.000,00</div>
+      <div class="icon-line">
+        <img src="assets/clock.svg" alt="clock">
+        <div class="time">15:01</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav>
+    <div class="footer">
+      <a href="home.html"><img src="assets/Group.svg"></a>
+      <a href="historylist.html"><img src="assets/material-symbols_history.svg"></a>
+      <a href="notifikasi.html"><img src="assets/Group(1).svg"></a>
+      <a href="profil.html"><img src="assets/Group(2).svg"></a>
+    </div>
+  </nav>
+
+  <!-- JavaScript -->
+  <script>
+    function goToPage(page) {
+      alert("Navigasi ke: " + page);
+      // Untuk penggunaan nyata, ganti dengan:
+      // window.location.href = page;
+    }
+  </script>
+
+</body>
+</html>
