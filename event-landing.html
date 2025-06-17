@@ -140,6 +140,34 @@
     .content {
       max-width: 480px;
     }
+
+    a.btn-link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #375a9d;
+  border-radius: 24px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(55,90,157,0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+a.btn-link:hover,
+a.btn-link:focus {
+  background-color: #2a456f;
+  box-shadow: 0 6px 14px rgba(55,90,157,0.6);
+  outline: none;
+}
+
+a.btn-link:active {
+  box-shadow: 0 2px 6px rgba(55,90,157,0.25);
+  background-color: #244063;
+}
+
   }
 </style>
 </head>
@@ -153,8 +181,9 @@
       <span class="material-icons" aria-hidden="true">camera_alt</span>
       <span>EVENT</span>
     </div>
-    <button type="button" id="signUpBtn" aria-label="Sign up">Sign up</button>
-    <button type="button" id="loginBtn" aria-label="Login">Login</button>
+<a href="signup.html" class="btn-link" aria-label="Sign up">Sign up</a>
+<a href="login.html" class="btn-link" aria-label="Login">Login</a>
+
   </main>
 
 <script>
